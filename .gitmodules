@@ -1,0 +1,6 @@
+[submodule "frontend/mysetting/frontend/spend-management-webapp-frontend"]
+	path = frontend/mysetting/frontend/spend-management-webapp-frontend
+	url = https://gitlab.com/SystemAbu/spend-management-webapp-frontend.git
+[submodule "frontend/spend-management-webapp-frontend/frontend/spend-management-webapp-frontend"]
+	path = frontend/spend-management-webapp-frontend/frontend/spend-management-webapp-frontend
+	url = https://gitlab.com/SystemAbu/spend-management-webapp-frontend.git

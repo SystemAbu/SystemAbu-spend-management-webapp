@@ -3,7 +3,7 @@ services:
     container_name: backend
     build:
       context: .
-      dockerfile: postgresql/mysetting/Dockerfile
+      dockerfile: backend/mysetting/Dockerfile
     # image: postgresql
     environment:
       POSTGRES_USER: postgres
@@ -16,7 +16,7 @@ services:
   app:
     container_name: app
     build: 
-      context: ./rails
+      context: ./app
       dockerfile: mysetting/Dockerfile
     # image: spend-management-rails
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
@@ -25,7 +25,7 @@ services:
     depends_on:
       - backend
     volumes:
-      - ./rails/:/spend-management-webapp
+      - ./app/spend-management-webapp-app:/spend-management-webapp
       - public-data:/spend-management-webapp/public
       - tmp-data:/spend-management-webapp/tmp
     # networks:
@@ -35,11 +35,12 @@ services:
   frontend:
     container_name: frontend
     build: 
-      context: ./nginx/mysetting
-      dockerfile: Dockerfile
+      context: ./frontend/
+      dockerfile: mysetting/Dockerfile
     # image: nginx
     volumes:
-      - ./nginx/mysetting/app.conf:/etc/nginx/app.conf
+      - ./frontend/mysetting/app.conf:/etc/nginx/app.conf
+      - ./frontend/spend-management-webapp-frontend:/home/node/app
       - public-data:/spend-management-webapp/public
       - tmp-data:/spend-management-webapp/tmp
     ports:
