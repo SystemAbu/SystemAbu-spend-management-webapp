@@ -1,8 +1,0 @@
-<h1>new Test Data</h1>
-
-<%= form_with model: @test do |form| %>
-
-  <div><%= form.label :pass %> <%= form.text_field :pass, value: @test.pass.to_i %></div>
-  <div><%= form.label :user_id %> <%= form.text_field :user_id %></div>
-  <%= form.submit %>
-<% end %>

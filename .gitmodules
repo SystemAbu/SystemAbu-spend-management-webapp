@@ -4,3 +4,6 @@
 [submodule "frontend/spend-management-webapp-frontend/frontend/spend-management-webapp-frontend"]
 	path = frontend/spend-management-webapp-frontend/frontend/spend-management-webapp-frontend
 	url = https://gitlab.com/SystemAbu/spend-management-webapp-frontend.git
+[submodule "spend-management-webapp-frontend"]
+	path = spend-management-webapp-frontend
+	url = https://gitlab.com/SystemAbu/spend-management-webapp-frontend.git
