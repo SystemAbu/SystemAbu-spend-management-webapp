@@ -13,6 +13,7 @@ RUN rm -f /etc/nginx/conf.d/*
 COPY --from=build /home/node/app/build /var/www
 
 # Nginxの設定ファイルをコンテナにコピー
-ADD mysetting/app.conf /etc/nginx/conf.d/app.conf
+ADD ./mysetting/nginx.conf /etc/nginx/
+ADD ./mysetting/default.conf /etc/nginx/conf.d/
 # ビルド完了後にNginxを起動
 CMD /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf

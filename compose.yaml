@@ -4,54 +4,40 @@ services:
     build:
       context: .
       dockerfile: backend/mysetting/Dockerfile
-    # image: postgresql
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-    # networks:
-    #   - back-tier
 
   app:
     container_name: app
     build: 
       context: ./app
       dockerfile: mysetting/Dockerfile
-    # image: spend-management-rails
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
-    # ports:
-    #   - "3000:3000"
     depends_on:
       - backend
     volumes:
-      - ./app/spend-management-webapp-app:/spend-management-webapp
+      - ./app/spend-management-webapp-app:/spend-management-webapp-app
       - public-data:/spend-management-webapp/public
-      - tmp-data:/spend-management-webapp/tmp
-    # networks:
-    #   - front-tier
-    #   - back-tier
+      - tmp-data:/spend-management-webapp-app/tmp
 
   frontend:
     container_name: frontend
     build: 
       context: ./frontend/
       dockerfile: mysetting/Dockerfile
-    # image: nginx
     volumes:
-      - ./frontend/mysetting/app.conf:/etc/nginx/app.conf
+      - ./frontend/mysetting/nginx.conf:/etc/nginx/nginx.conf
       - ./frontend/spend-management-webapp-frontend:/home/node/app
       - public-data:/spend-management-webapp/public
-      - tmp-data:/spend-management-webapp/tmp
+      - tmp-data:/spend-management-webapp-app/tmp
     ports:
-      - "80:80"
+      - "3000:80"
     depends_on:
       - app
 
 volumes:
   public-data:
   tmp-data:
-# networks:
-#   front-tier: {}
-#   back-tier: {}
-
