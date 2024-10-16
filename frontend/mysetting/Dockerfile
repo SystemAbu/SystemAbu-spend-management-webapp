@@ -1,15 +1,24 @@
-FROM node:14.4.0 as build
+# 開発用のステージ
+FROM node:14.4.0-buster as dev
 WORKDIR /home/node/app
 COPY spend-management-webapp-frontend/ /home/node/app
 RUN npm install
+CMD ["npm", "start"]
+
+
+FROM dev AS build
 RUN npm run build
 
-FROM nginx
+
+# 本番環境用のステージ
+# 次のコマンドで実行 [$ docker build --target prod .]
+FROM nginx AS prod
 
 # インクルード用のディレクトリ内を削除
 RUN rm -f /etc/nginx/conf.d/*
 
 # Reactのビルド生成フォルダの中身をnginxのルートディレクトリにコピー
+RUN mkdir -p /var/www
 COPY --from=build /home/node/app/build /var/www
 
 # Nginxの設定ファイルをコンテナにコピー
