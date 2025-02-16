@@ -1,9 +1,14 @@
 # 開発用のステージ
-FROM node:14.4.0-buster as dev
+FROM node:22.5 AS dev
 WORKDIR /home/node/app
 COPY spend-management-webapp-frontend/ /home/node/app
+
+# モジュールのインストール
+RUN npm install -g npm@10.9.2
 RUN npm install
-CMD ["npm", "start"]
+
+# React起動
+CMD ["/bin/bash", "-c", "npm install && npm run dev"]
 
 
 FROM dev AS build

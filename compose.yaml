@@ -26,7 +26,7 @@ services:
   frontend:
     container_name: frontend
     build: 
-      context: ./frontend/
+      context: ./frontend
       dockerfile: mysetting/Dockerfile
       target: dev
     volumes:
@@ -34,11 +34,13 @@ services:
       - ./frontend/spend-management-webapp-frontend:/home/node/app
       - public-data:/spend-management-webapp/public
       - tmp-data:/spend-management-webapp-app/tmp
+      - frontend_node_modules:/home/node/app/node_modules
     ports:
-      - "80:3000"
+      - "80:5173"
     depends_on:
       - app
 
 volumes:
+  frontend_node_modules: {}
   public-data:
   tmp-data:
