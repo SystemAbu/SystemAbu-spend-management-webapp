@@ -15,20 +15,21 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: backend
   username: postgres
   password: password
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: backend
+
 
 development:
   <<: *default
   database: spend_management_webapp_app_development
-
+  port: 5432
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
-  # When left blank, PostgreSQL will use the default role. This is
+  # When left blank, PostgreSQL will use the default role. This isPGPORT 
   # the same name as the operating system user running Rails.
   #username: spend_management_webapp_app
 
@@ -81,7 +82,20 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: spend_management_webapp_app_production
-  username: spend_management_webapp_app
-  password: <%= ENV["SPEND_MANAGEMENT_WEBAPP_APP_DATABASE_PASSWORD"] %>
+  primary: &primary_production
+    <<: *default
+    database: spend_management_webapp_app_production
+    username: spend_management_webapp_app
+    password: <%= ENV["SPEND_MANAGEMENT_WEBAPP_APP_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: spend_management_webapp_app_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: spend_management_webapp_app_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: spend_management_webapp_app_production_cable
+    migrations_paths: db/cable_migrate
