@@ -2,42 +2,52 @@ services:
   backend:
     container_name: backend
     build:
-      context: .
-      dockerfile: backend/mysetting/Dockerfile
+      context: ./backend
+      dockerfile: mysetting/Dockerfile
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-
+    networks:
+      - spend_management_webapp_network
   app:
     container_name: app
-    build: 
+    build:
       context: ./app
       dockerfile: mysetting/Dockerfile
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
     depends_on:
       - backend
     volumes:
       - ./app/spend-management-webapp-app:/spend-management-webapp-app
       - public-data:/spend-management-webapp/public
       - tmp-data:/spend-management-webapp-app/tmp
-
+    networks:
+      - spend_management_webapp_network
   frontend:
     container_name: frontend
-    build: 
-      context: ./frontend/
+    build:
+      context: ./frontend
       dockerfile: mysetting/Dockerfile
+      target: dev
     volumes:
       - ./frontend/mysetting/nginx.conf:/etc/nginx/nginx.conf
       - ./frontend/spend-management-webapp-frontend:/home/node/app
       - public-data:/spend-management-webapp/public
       - tmp-data:/spend-management-webapp-app/tmp
+      - frontend_node_modules:/home/node/app/node_modules
+    env_file:
+      - ./frontend/spend-management-webapp-frontend/.env
     ports:
-      - "3000:80"
+      - "80:80"
     depends_on:
       - app
-
+    networks:
+      - spend_management_webapp_network
 volumes:
+  frontend_node_modules: {}
   public-data:
   tmp-data:
+
+networks:
+  spend_management_webapp_network:

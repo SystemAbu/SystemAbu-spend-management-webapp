@@ -1,7 +1,7 @@
 FROM ruby:3.3.0
 
 RUN apt update -qq && apt install -y postgresql-client
-RUN mkdir /spend-management-webapp-app
+# RUN mkdir /spend-management-webapp-app
 WORKDIR /spend-management-webapp-app
 COPY  ./spend-management-webapp-app /spend-management-webapp-app
 
@@ -18,6 +18,8 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 # puma.sockを配置するディレクトリを作成
-RUN mkdir -p tmp/pids
+# RUN mkdir -p tmp/pids
 
+# CMD ["rails", "server", "-b", "0.0.0.0"]
+# CMD ["bash", "-c", "rails db:setup && rails db:migrate && rails server -b '0.0.0.0'"]
 # CMD ["rails", "server"]
