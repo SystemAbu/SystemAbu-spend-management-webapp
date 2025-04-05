@@ -18,7 +18,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # origins 'http://localhost:80'
-    origins "http://frontend:80"
+    origins ENV.fetch("CORS_ORIGIN")
     # origins "*"
 
     resource "*",
