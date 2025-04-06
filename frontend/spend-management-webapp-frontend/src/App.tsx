@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
-
-const axiosBase = axios.create({
-  responseType: 'json'
-});
+import api from './api';
 
 // ユーザーの型を定義
 interface Test {
@@ -37,7 +33,7 @@ function App() {
   const getTestAllData = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await axiosBase.get(`/api/v1/tests/`);
+      const response = await api.get(`/api/v1/tests/`);
       setTestAllData(response.data);
       console.log("API Response:", response.data);
     } catch (error) {
@@ -49,7 +45,7 @@ function App() {
   const getTestData = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await axiosBase.get(`/api/v1/tests/${testIdToGet}`);
+      const response = await api.get(`/api/v1/tests/${testIdToGet}`);
       setTestData(response.data);
       console.log("API Response:", response.data);
     } catch (error) {
@@ -61,7 +57,7 @@ function App() {
   const sendTestData = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await axiosBase.post("/api/v1/tests/", {
+      const response = await api.post("/api/v1/tests/", {
         test_id: testIdToPost,
         test_name: testNameToPost
       });
@@ -75,7 +71,7 @@ function App() {
   const updateTestData = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await axiosBase.put(`/api/v1/tests/${testIdToUpdate}`, {
+      const response = await api.put(`/api/v1/tests/${testIdToUpdate}`, {
         test_name: testNameToUpdate
       });
       console.log("Test data updated:", response.data);
@@ -88,7 +84,7 @@ function App() {
   const deleteTestData = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await axiosBase.delete(`/api/v1/tests/${testIdToDelete}`);
+      const response = await api.delete(`/api/v1/tests/${testIdToDelete}`);
       console.log("Test data updated:", response.data);
     } catch (error) {
       console.error("Error updating test:", error);
