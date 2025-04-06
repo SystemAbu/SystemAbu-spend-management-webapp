@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig(({ mode }) => {
   // Koyebかどうかを判定し、ローカルの場合、.envを読み込む
   const isVercel = !!process.env.VERCEL
-  const env = loadEnv(isVercel ? 'vercel' : mode, process.cwd(), '')
+  const env = isVercel ? process.env : loadEnv(mode, process.cwd(), '')
 
   return {
     plugins: [react()],
