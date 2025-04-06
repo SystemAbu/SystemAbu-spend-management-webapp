@@ -45,5 +45,8 @@ module SpendManagementWebappApp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    # ミドルウェアに API キー認証を追加
+    require_relative '../app/middleware/api_key_auth_middleware'
+    config.middleware.use ApiKeyAuthMiddleware
   end
 end
