@@ -1,0 +1,27 @@
+:root {
+	--base-color: #F5FDFF;
+	--link-text-color: #3468DC;
+	--button-color: #89B2FF;
+	--header-color: #C4EBFF;
+	--header-height: 70px;
+	background-color: #F5FDFF;
+	min-height: 100vh;
+}
+
+body {
+	background-color: #F5FDFF;
+	margin: 0;
+	/* display: flex; */
+}
+
+#root {
+	min-height: 100vh;
+}
+
+#main-container {
+  height: calc(100vh - var(--header-height)); /* 画面全体の高さからヘッダー分を引く */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
