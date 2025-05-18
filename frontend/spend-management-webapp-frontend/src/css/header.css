@@ -1,0 +1,21 @@
+.guest-header {
+  background-color: var(--header-color);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.make-account-link {
+  color: var(--link-text-color);
+  font-size: 1.25rem;
+  margin-right: 20px;
+  vertical-align: middle;
+}
+
+.app-logo-icon {
+  width: 120px;
+  height: 50px;
+  margin-left: 13px;
+  margin-right: 20px;
+}
