@@ -1,13 +1,12 @@
-import GuestHeader from './component/GuestHeader';
-import Top from './Paage/Top';
+import AppRoutes from './router/AppRoutes';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <GuestHeader />
-      <Top />
-    </>
-  );
+  <BrowserRouter>
+    <AppRoutes />
+  </BrowserRouter>
+  )
 }
 
 export default App;

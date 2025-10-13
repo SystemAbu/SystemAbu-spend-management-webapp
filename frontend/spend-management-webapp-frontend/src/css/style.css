@@ -3,7 +3,11 @@
 	--link-text-color: #3468DC;
 	--button-color: #89B2FF;
 	--header-color: #C4EBFF;
+	--step-bar-color: #4FB1E3;
+	--step-bar-active-color: #E3714F;
 	--header-height: 70px;
+	--border-color: black;
+	--textbox-gray-out: #ECEEEF;
 	background-color: #F5FDFF;
 	min-height: 100vh;
 }
@@ -14,14 +18,37 @@ body {
 	/* display: flex; */
 }
 
-#root {
-	min-height: 100vh;
+#guest-main-container {
+	width: 100vw;
 }
 
-#main-container {
-  height: calc(100vh - var(--header-height)); /* 画面全体の高さからヘッダー分を引く */
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.authentication-box {
+	padding-bottom: 70px;
+	margin: 65px auto 70px;
+	width: 55%;
+	max-width: 1050px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 15px;
+	border: 2px solid black;
+}
+
+.sign-up-title {
+	margin-top: 40px;
+	text-align: center;
+	font-size: 2.5rem ;
+	font-weight: 400;
+}
+
+.sign-summary-text {
+	margin-top: 50px;
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+.authentication-content {
+	width: 400px;
+	height: 100%;
+  border: none;
 }

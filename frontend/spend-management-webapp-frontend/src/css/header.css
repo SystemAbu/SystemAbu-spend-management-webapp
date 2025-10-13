@@ -6,8 +6,12 @@
   justify-content: space-between;
 }
 
-.make-account-link {
+.link {
   color: var(--link-text-color);
+
+}
+
+.make-account-link {
   font-size: 1.25rem;
   margin-right: 20px;
   vertical-align: middle;

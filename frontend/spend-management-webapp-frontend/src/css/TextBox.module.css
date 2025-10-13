@@ -1,0 +1,31 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-top: 25px;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.input {
+  padding: 10px;
+  font-size: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+.input:disabled {
+  background-color: var(--textbox-gray-out);
+  color: black;
+}
+
+.authentication-medium-textBox {
+  height: 25px;
+}
